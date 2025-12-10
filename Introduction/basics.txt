@@ -1,0 +1,77 @@
+SQL:
+It is data manipulation language (DML) that is used to connect with relational databases (RDBMS).
+
+What is Database (DB)?
+Basically it is a collection of related information that can be stored in a difference ways
+eg: Phonebook,Facebook user base
+
+Computers + databases -> They are great at keeping track of large amount of information.
+1.) Keep track of information in a area
+2.) This allows trillions of pieces of information can to be stored and  readily available.
+
+Database Management Systems (DBMS):
+A special information that helps users to create and maintain dataset. (CRUD) Create Read Update Delete
+a.) Makes it east to manage large amount of data
+b.) Handles Security
+c.) Backups
+d.) Importing/exporting data
+e.) Concurrency
+f.) Interaction with software applications.
+
+Two types of Databases:
+1.) Relational Databases -> Organises data in one or more tables
+2.) Non-Relational databases -> Organises data is anything but a traditional table
+
+Non Relational Databases:
+Organise data into one or more tables
+1.) each table has columns and rows
+2.) A unique key identifies each row.
+
+eg: mySql,Oracle,PostreSQL,mariaDb
+
+Structured Query language:
+It is used for interacting with RDBMS.
+Used to perform CRUD operatiosn as well as administatrative tasks (database mgmt,security,backup);
+Following things can be accomplished following:
+1.) CRUD operatiosn
+2.) Create and manage databases
+3.) Design and create db tables
+4.) Perform administatrative tasks -> (security, import/export)
+
+The code used on One RDBMS is not always portable to another without modification.
+The concepts will remain the same.
+Database Queries:
+They are requests made to DBMS for specific information.
+
+Tables and keys:
+Data are arranged in rows and columns
+The columns name defines the keys in the table
+A row defines the values correspoding to column name. Each row defines a record.
+Each row has a unique called primary key. This attribute is used to uniquely define a record in db.
+
+Surrogate key:
+It is a primary key that does not have a any meaning in regular world.
+
+Natural key:
+It is a primary key created in such a way that it is unique based on a attribute in the database table.
+eg: email:
+
+Foriegn key: 
+A key that is used to map primary key of another table using the primary key of that table.
+
+A table can have multiple Foriegn keys to map multiple tables.
+
+Composite key:
+If the database uniquely identifies a row with more than one Foriegn key.
+
+SQL is a hybrid language. combines 4 languages in one.
+1.) Data Query Langauge (DQL)
+2.) Data Definition Langauge (DDL)
+3.) Data Control Langauge (DCL)
+4.) Data Manipulation Langauge (DML)
+
+Queries:
+set of instriction given to db to get information you need.
+Eg:SELECT employee.name,employee.age FROM employee WHERE employee.salary > 30000
+
+
