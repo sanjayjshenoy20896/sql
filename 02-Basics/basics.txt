@@ -1,7 +1,20 @@
-#Delete a database:
+#Listing of databases:
+The listing of all the databases can be done by the following syntax
+
+show databases;
+
+#Creating a new database;
+The creation of new databse can be using the keyword "create"
+
+syntax:
+create database <database_name>;
+
+eg:
+create database giraffe;
+
+Delete a database:
 In sql, the database Deletion is reffered to as drop;
 
 syntax: drop database <database_name>;
 
 eg: drop database giraffe;
-
