@@ -1,0 +1,7 @@
+#Delete a database:
+In sql, the database Deletion is reffered to as drop;
+
+syntax: drop database <database_name>;
+
+eg: drop database giraffe;
+
