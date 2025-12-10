@@ -74,4 +74,6 @@ Queries:
 set of instriction given to db to get information you need.
 Eg:SELECT employee.name,employee.age FROM employee WHERE employee.salary > 30000
 
+user: root
+password:sanjay@20896
 
