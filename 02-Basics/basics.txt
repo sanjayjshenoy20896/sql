@@ -18,3 +18,77 @@ In sql, the database Deletion is reffered to as drop;
 syntax: drop database <database_name>;
 
 eg: drop database giraffe;
+
+
+Data types in mysql
+
+INT -> Whole numbers
+DECIMAL(M,N) -> Decimal numbers
+VARCHAR(N) -> String of length N 
+BLOB -> Binary Large Object
+Date -> YYYY-MM-DD
+TIMESTAMP -> 'YYYY-MM-DD HH:MM:SS'
+
+Creating a new table for our database
+The table can be created by using the "create table"
+
+syntax: create table <table_name>{
+    //individual field in each line
+}
+
+eg: 
+create table student (
+	student_id INT PRIMARY KEY,
+    name VARCHAR(20),
+    major VARCHAR(20)
+);
+
+or 
+
+create table student (
+	student_id INT,
+    name VARCHAR(20),
+    major VARCHAR(20),
+    PRIMARY KEY(student_id)
+);
+
+Describe a table:
+This is used to actually describe the table with all the field and settings
+Syntax: describe <table_name>;
+eg: describe student;
+
+Modify a table:
+This is used to modify a table using ALTER keyword
+syntax:ALTER TABLE table_name ADD/DROP <field> <data_type>
+eg:
+ALTER TABLE student ADD gpa DECIMAL(3,2);
+ALTER TABLE student DROP gpa;
+
+Delete a table:
+This is used to actually delete a tavle with all the fields and settings:
+syntax:drop table table_name
+eg: drop table student;
+
+
+Insert data into a table:
+insert into student values (1,'Jack','Biology');
+insert into student(name,major) values ('Jack','Biology');
+
+
+Update a record -> it is done by using the update keyword
+update student set name = 'Tom', major = 'undecided' WHERE student_id = 1;
+
+
+Delete a record
+delete from student WHERE name = 'Tom' and major='undecided'
+
+Constraints:
+NOT NULL -> value cannot be null. it has to be assigned a value
+UNIQUE -> Ensure that all values in the column are distinct and not overlapping.
+PRIMARY KEY -> Uniquely identifies a row in a table
+FORIEGN KEY -> This ensures that values in the foreign key column exist in the referenced primary key column, maintaining relationships between tables.
+CHECK -> Defines a condition that must be true for all values in a column
+eg:a CHECK constraint can ensure that a salary value is always positive.
+DEFAULT -> Specifies a default value for a column when no value is explicitly provided during an INSERT operation.
+
+
