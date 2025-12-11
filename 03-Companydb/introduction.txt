@@ -1,0 +1,34 @@
+Company database introduction
+
+Employee table
+emp_id -> int primary key -> unique key
+first_name -> VARCHAR -> string 
+last_name -> VARCHAR -> String
+birth_date -> Date -> date field
+sex -> VARCHAR -> String
+salary -> int -> number
+super_id -> int -> foriegn key pointing to emp_id of employee table
+branch_id -> int -> foreign key pointing to branch id of branch table
+
+Branch table
+branch_id -> int primary key -> unique key
+branch name -> VARCHAR -> string
+mgr_id -> foriegn key pointing to emp_id in Employee table
+mgr_start_date -> Date -> date field
+
+Client table
+client_id -> int primary key -> unique key
+client_name -> VARCHAR -> String
+branch_id -> foriegn key pointing to branch_id of branch table
+
+Works with
+emp_id -> int -> primary key pointing to emp_id of employee table
+client_id -> int -> primary key pointing to client_id of client table
+total_sales -> int -> number
+
+Branch supplier
+branch_id -> int -> primary key pointing to branch_id of branch table
+supplier_name -> VARCHAR -> Primary key String
+supply_type -> VARCHAR
+
+
