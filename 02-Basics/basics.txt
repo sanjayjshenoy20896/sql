@@ -90,5 +90,7 @@ FORIEGN KEY -> This ensures that values in the foreign key column exist in the r
 CHECK -> Defines a condition that must be true for all values in a column
 eg:a CHECK constraint can ensure that a salary value is always positive.
 DEFAULT -> Specifies a default value for a column when no value is explicitly provided during an INSERT operation.
+AUTO INCREMENT -> it is used to autoincrement the integer index by one on a new record.
+
 
 

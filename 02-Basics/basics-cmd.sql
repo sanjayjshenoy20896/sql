@@ -34,3 +34,6 @@ insert into student(name,major) values ('Claire','Chemistry');
 insert into student(name,major) values('Jack','English');
 insert into student(name,major) values('Mike','Comp.Sci');
 
+
+insert into student(name,major) values('Sanjay','Comp.Sci');
+

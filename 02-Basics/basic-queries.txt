@@ -1,0 +1,12 @@
+Basic Queries:
+Basically queries in sql are handled by using the SELECT keyword.
+
+
+comparison operators:
+< , > , <=,>=,=,<>,and,or
+
+<> -> not equal
+
+IN () add values to Specify
+
+
