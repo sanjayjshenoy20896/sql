@@ -31,4 +31,10 @@ branch_id -> int -> primary key pointing to branch_id of branch table
 supplier_name -> VARCHAR -> Primary key String
 supply_type -> VARCHAR
 
+on delete 
 
+1.) on delete set null;
+When a row in the parent table is deleted, the database sets the foreign key column(s) in related child table rows to NULL. This behavior is suitable when child records can exist independently after the parent is deleted. 
+
+2.) on delete cascade null;
+When you delete a row from the parent table, the database automatically deletes all rows in the child table that have a matching foreign key value. 
