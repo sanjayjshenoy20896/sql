@@ -1,0 +1,88 @@
+What is table and field
+Table -> it is a set of rows and columns
+field -> It is a column representing an attribute
+
+What is a select command
+It is used to retrive data from database
+
+What are sql constraints
+They are rules that are applied to maintain data consistancy
+PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, NOT NULL,AUTO INCREMENTING
+
+Normalisdation:
+organizing data to reduce redundancy, improve integrity, and make it more efficient, often by structuring it into related tables
+
+Indexes:
+Indexes speed up lookups. Types include clustered, non-clustered, composite, unique, and covering indexes.
+used for storing its important parts and enabling faster data search and retrieval.
+
+Group by:
+It is used group rows by same values with aggregates
+
+Aggregate functions
+SUM(), COUNT(), AVG(), MIN(), MAX()
+
+Alias:
+It is used to remporarily name a column in a database
+
+View:
+It is a saved instance of a query in a virtual table
+
+Difference between IN and between
+BETWEEN: Checks if value is within a range.
+IN: Checks if value is among specified list.
+
+Difference between IN and exists
+IN: Compares a value against a list or subquery.
+EXISTS: Checks if subquery returns any rows.
+
+Difference between ANY and all
+ANY: True if condition holds for at least one value.
+ALL: True if condition holds for all values.
+
+Temporary table:
+A table created for intermediate storage, often session-specific.
+
+Subquery:
+It is a query listed another query.
+
+Trigger:
+Code that runs automatically when they is an INSERT,UPDATE AND DELETE events
+
+Stored procedures:
+precompilied list of sql commands stored in a database
+
+Function:
+A reusable program that returns a value or a record.
+
+Difference betweem UNION and UNION ALL
+UNION: Combines results, removes duplicates.
+UNION ALL: Combines results, keeps duplicates.
+
+Difference between RANK(), DENSE_RANK(), and ROW_NUMBER()
+RANK(): Skips ranks for ties
+DENSE_RANK(): No gaps in ranking
+ROW_NUMBER(): Assigns unique numbers
+
+ACID Properties:
+A -> ATOMICITY -> Ensures that a transaction is treated as a single, indivisible unit; either all of its operations are completed successfully
+C -> CONSISTANCY -> Guarantees that a transaction only brings the database from one valid state to another, adhering to all predefined rules and constraints
+I -> Isolation -> Ensures that multiple transactions can run concurrently without interfering with each other
+D -> Durability -> Guarantees that once a transaction has been successfully committed, its changes are permanent and will not be lost, even in the event of system crashes, power failures, or other abnormal terminations
+
+
+
+
+
+
+
+
+
+
+
+Concepts
+1.) different between delete and TRUNCATE
+2.) Common table expression
+3.) Difference between WHERE and HAVING
+4.) 
+

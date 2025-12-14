@@ -1,0 +1,137 @@
+1.) What is SQL?
+It is used a language to interact for information from a relational databases.
+
+2.) What are different types of SQL commands?
+They are classifed based on the type of action they perform
+a.) DDL -> Data Definition Language -> CREATE, ALTER,DROP and TRUNCATE
+b.) DML -> Data Manipulation Language ->  INSERT, UPDATE, DELETE
+c.) DQL -> Data Query Language -> Select
+d.) DCL -> Data Control Language -> GRANT and REVOKE
+e.) TCL -> Transmission Control Language -> COMMIT ,CONTROL and ROLLBACK
+
+3.) Main difference between Database, RDBMS and DBMS?
+Database: Organised collection of data
+DBMS: Software to manage databases.
+RDBMS: A DBMS that is used to manage the relational data stored in structured format in rows and columns
+eg: MySQL,postgreSQl and SQL server
+
+4.) Primary Key
+Column or set of columns that uniquely define a record in the database. They cannot be null or duplicates
+
+5.) Foriegn Key
+It is a field from one table that is referenced in another table.
+This is used to prepare relationship betweem 2 tables in a database
+
+6.) Unique Key
+It is used to define a key using the UNIQUE constraint. This gurantees that every value in the column remains distinct.
+
+7.) What is NULL in the context of database
+It represents missing or absence of value (Unknown data).
+
+8.) difference between VARCHAR and CHAR?
+VARCHAR(N) -> used to store a collection of characters with variable length
+char(n) -> used to store a fixed length of characters. Rest of space is padded with empty character
+
+9.) Data Types in SQL
+Numeric → INT, DECIMAL, FLOAT
+String → CHAR, VARCHAR, TEXT
+Date/Time → DATE, TIME, TIMESTAMP
+Binary → BLOB
+
+10.) difference between Primary key and Unique key?
+Primary key -> One per table, connot be null
+Unique key -> Multiple allowed, Null is a permitted value
+
+11.) Default and Check constaints?
+DEFAULT: Assigns a default value if none is provided.
+CHECK: Ensures values meet a condition.
+
+12.) Schema
+A schema is a logical container for database objects such as tables, views, and procedures
+
+13.) Candidate key:
+One more or keys are used to define Unique identity rows
+
+14.) Composite key:
+A key formed by combining two or more columns to uniquely identify a row.
+
+15.) Difference between Super key, Candidate key and Primary key
+Super Key: Any column set that uniquely identifies rows.
+Candidate Key: Minimal super key (no redundant attributes).
+Primary Key: Chosen candidate key used for row identification.
+
+16.) Cartesian join
+Also called a cross join, it returns the Cartesian product of two tables.
+
+
+17.) Difference between SQL, MySQL and SQL server
+SQL: The language for managing relational data.
+MySQL: An open-source RDBMS using SQL.
+SQL Server: Microsoft’s RDBMS product.
+
+18.) Difference between SQL and NoSQL
+SQL:Relational, structured, ACID-compliant.
+NoSQL: Non-relational, schema-free, designed for scalability.
+
+18.) Advantages of SQL
+Standardized language
+Portable across databases
+Supports complex queries and joins
+Ensures data integrity
+
+
+19.) Main applications of sql
+Using SQL, we can:
+
+create, delete, and update tables in a database
+access, manipulate, and modify data in a table
+retrieve and summarize the necessary information from a table or several tables
+add or remove certain rows or columns from a table
+
+20.) JOINS:
+Combines one or more tables through a relationship.
+
+(INNER) JOIN – returns only those records that satisfy a defined join condition in both (or all) tables. It's a default SQL join.
+
+LEFT (OUTER) JOIN – returns all records from the left table and those records from the right table that satisfy a defined join condition.
+
+RIGHT (OUTER) JOIN – returns all records from the right table and those records from the left table that satisfy a defined join condition.
+
+FULL (OUTER) JOIN – returns all records from both (or all) tables. It can be considered as a combination of left and right joins.
+
+Note:
+FULL OUTER JOIN is supported by PostgreSQL, SQL Server, Oracle, and MySQL 8.0 and above, but MySQL only allows it through UNION patterns; meanwhile, SQLite does not support RIGHT JOIN, which can be emulated using LEFT JOIN in combination with UNION.
+
+
+27.) Schema:
+It is a collection of database tables along with table triggers.
+
+28.) SQL operator:
+a keyword used in SQL queries to perform a specific operation.
+
+29.) Clause:
+conditions imposed in a query to get a desired result.
+eg: WHERE, LIMIT ,HAVING,ORDER BY, LIKE , NOT LIKE
+
+30.) Create a table:
+A new table in a database can be created by using the "create table" syntax.
+
+31.) Update a table:
+The data in a table can be update by using the set keyword along woith restriction to update only a certain row or group of rows.
+
+32.) Delete a table:
+A table can be deleted by using the drop table cmd.
+
+33.) Sort a table -> using the ORDER BY
+
+34.) How to select all columns  in a table - > using the * after rhe select command
+
+35.) How to select common records from 2 tables -> 
+SELECT col1, col2 FROM table_1
+INTERSECT
+SELECT col1, col2 FROM table_2;
+
+36.)Distinct:
+It is used to find distinct values from a column.
+
+Datacamp -> intermediate
