@@ -71,6 +71,15 @@ I -> Isolation -> Ensures that multiple transactions can run concurrently withou
 D -> Durability -> Guarantees that once a transaction has been successfully committed, its changes are permanent and will not be lost, even in the event of system crashes, power failures, or other abnormal terminations
 
 
+SQL execution order:
+FROM
+WHERE
+GROUP BY
+HAVING
+SELECT
+ORDER BY
+
+
 
 
 
