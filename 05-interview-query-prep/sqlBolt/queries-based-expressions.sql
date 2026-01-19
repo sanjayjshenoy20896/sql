@@ -14,6 +14,4 @@ INNER JOIN Boxoffice ON movies.id = Boxoffice.movie_id ;
 -- List all movies that were released on even number years
 SELECT *  FROM Movies
 INNER JOIN Boxoffice ON movies.id = Boxoffice.movie_id 
-Where (year%2) ==0
-;
-
+Where (year%2) ==0;
