@@ -1,0 +1,164 @@
+15 SQL interview Questions
+
+1.) Difference between DBMS and RDBMS
+
+DBMS -> The basic way to store data in files
+RDSMS -> Have relation beween data for easy query of information
+-> Faster data retrival
+-> Dealing with large datasets
+-> Support multiple users
+-> High security
+-> Optimised for large amount of data
+
+2.) Primary and foriegn key
+Primary: Key used to uniquely identify a row in a table
+
+Foriegn: It helps you connect data across tables ensuring that records in one table can reference related information in another
+
+3.) Constarints
+Rules that is used for data within a table
+It heps in keeping data accurate
+
+a.) Not null: column cannot be empty for a records
+b.) Unique: No 2 values in column are same
+c.) Primary: It combines not null and unique Constarint
+-> one field to unique identify records
+d.) Foriegn Key: Key used to link between tables
+e.) Check: Helps to set a condition
+f.) Default: used to take a default value
+
+4.) Explain DDL AND DML command
+DDL: Data definition Lang
+Define structure of Database
+a.) CREATE : CREATE TABLE <table_name> -> Create a new table with definition
+b.) ALTER: ALTER TABLE -> Alter an existing table definition
+c.) DROP: -> Delete an existing table
+It does not deal with data stored in the table but with the staructure of data
+DML: Data Manipulation lang
+Working with actual data
+a.) INSERT -> add data into table
+b.) UPDATE -> Update values in existing rows in a table
+c.) DELETE -> Remove record form the table
+
+5.) Difference between DELETE, DROP and TRUNCATE
+DELETE: 
+-> Removing a specific record based on condition
+
+
+DROP:
+-> Remobing the entire table
+-> It is done if it is no longer needed
+-> No rollback is possible
+
+TRUNCATE:
+-> It helps in removing the records in bulk and not chnaging the internal pkey
+-> No rollback is possible
+
+6.) Differentiate between Group By and Order By Clause
+Group BY:
+It is used to combine records by a perticular column and then perform compute operations
+It is used long with aggregate functions
+Order BY:
+it is used to sort the data by value in asending or secending order. It is ascending by default
+
+7.) Difference between where and havng clauses
+WHERE:
+It is used for filtering records before the grouping. It is like basic filtering.
+
+HAVING:
+It is used for filtering after grouping 
+filter groups created by the group by clause based on Aggregate Results ;ike counts or sum
+
+8.) Aggregate functions in SQL:
+a.) COUNT():
+-> COUNT(*) gives you total number of records
+b.) SUM()
+Adds the numebric value of the column specified
+c.) AVG()
+Calculates average of a numberic column
+d.)MIN()
+Computes the minimum value
+e) MAX()
+COMPUTES the maximum value
+
+9.) Indexing in sql and clustered index in sql
+Organising the data in indexing to increase speed of query for information
+Cluster index: etermines the physical sort order of data rows in a table, whereas a non-clustered index stores the index values separately with pointers pointing to the actual data
+
+10.) Normalisation and types:
+It works similiar to Organising data effiecientlt , minimising redundancy and preventing issues during data Manipulation
+-> Reduces duplication
+-> Prevent anomalies
+
+Types:
+a.) First Normal Form (1NF):
+Each table cell should contain a single value and 
+each column must have a unique name
+b.)Second Normal Form (2NF):
+All non-key attributes must depend on primary key
+c.) Third Normal Form (3NF):
+Every non key attribute must be independent of other non key attributes
+d.) Boyce-Codd Normal form (BCNF)
+Every Determinant (An Attribute that can determine other attributes) Must be Candidate key
+
+11.)Union and Union All operator:
+UNION:
+it combines booth lists into one.
+it removes duplicates
+SELECT Name FROM SchoolFriends
+UNION
+SELECT Name FROM WorkFriends;
+it a value name exists in both table then it appears only once
+
+UNION All:
+It combines both lists keeps every name even if they show up more than once
+SELECT Name FROM SchoolFriends
+UNION
+SELECT Name FROM WorkFriends;
+
+12.) How to find the second highest salary in a table
+It uses subquery here
+innermost query:
+select MAX(salary) FROM employee
+
+outer query:
+SELECT MAX(salary) FROM employee WHERE salary < (SELECT MAX(salary) FROM employee)
+
+final query
+SELECT name,salary FROM employee
+WHERE salary = (SELECT MAX(salary) FROM employee  where salary < (SELECT MAX(salary) FROM employee))
+
+13.) Views in SQL:
+It is like virtual table that does not store data in disk
+
+CREATE VIEW detailView AS
+<Query>
+
+SELECT * from deatilsview
+
+14.) How can you convert a text into data format
+eg: 20-11-2024
+str_to_date
+SELECT STR_TO_DATE('27-10-2024', '%d-%m-%Y')
+
+
+15.) Triggers in SQL:
+it is like a reflex action which allows you to set up automatic action
+Adding
+Updating
+Deleting
+
+When does it run:
+1.) INSERT: When new data is added to a table
+2.) UPDATE:When existing data in table changes
+3.) DELETE: When data is removed from a table
+
+CREATE TRIGGER UpdateBookStock
+AFTER INSERT ON BorrowedBooks
+FOR EACH ROW
+
+BEGIN
+    UPDATE BOOKS
+    SET available_count = available_count - 1
+    WHERE book_id = NEW.book_id;
+END;
