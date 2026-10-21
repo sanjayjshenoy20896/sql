@@ -244,4 +244,25 @@ Each table can have only one clustered index
 It is a security risk where attacker insert harmful code into queries , potentially accessing or tampering with db
 Validate input to allow only expected values , stored prcedures, and escape chars and db permisions
 
-41)
+41) DB schema:
+It is a conceptual container for housing various db elements such as tables, views and indexes and proceudyres
+Its primary purpose is to faciliatte org and segregation of db elements
+
+42.)How data integrity is ensured
+using constarints, normalization and transactions
+
+43.) Deadlock in sql:
+it occurs when 2 or more transactions cannot proceed thy are waiting for resources held by each other
+It can be prevented/ resolved by using techniques such as locking herarchies , timeouts or deadlock detction and resolution mechanisms
+
+44.) In and exists
+IN:
+-> Works on result set
+-> Doesnt work on subqueries in virtual tables
+-> Capmares every cvalue in result set
+
+Exists:
+-> Works in virtual tables
+-> is used in co-related queries
+-> exists the comparison when match is found
+
