@@ -1,0 +1,247 @@
+1.) SQL (Structured Query Language):
+It is a common language to interact with relational databases
+With sql, you can query , update and insert or delete data
+
+2.) Different types of sql command
+DML: Data Manipulation Language-> SELECT, INSERT and DELETE 
+DDL: Data Definition language -> CREATE, ALTER and DROP
+DCL: Data Control Language -> GRANT ,REVOKE
+TCL: Transaction Control Language -> rollback,COMMIT
+
+3.) Primary key:
+It is a unique id for each record in table
+It cant be empty or null
+
+4.) Foriegn key:
+It is a link between 2 tables
+This creates a relationship between tables and helps in maintaining data consistancy
+
+5.) DELETE and TRUNCATE
+They are both used to remove data from a table but work in different ways
+
+TRUNCATE -> DDL
+They are usedto delete all records in table
+we cant rollback the data
+it is auto command
+It is a faster operation
+
+DELETE -> DML
+It is used to delete row level and table level data
+We can initiate data rollback if we maintain Transaction
+it is explicit committed
+It is a slower operation
+
+6.) JOIN in SQL and its types
+It is used to combine 2 or more table using a related column
+a.) inner Join: 
+Given 2 tables a and b
+a JOIN b ON a.id = b.id
+
+b.) left Join
+Given 2 tables a and b
+a LEFT JOIN b ON a.id = b.id
+
+c.) Right Join
+Given 2 tables a and b
+a RIGHT JOIN b ON a.id = b.id
+
+d.) FULL OUTER JOIN
+Given 2 tables a and b
+a FULL OUTER JOIN b ON a.id = b.id
+
+7.) What do you mean by NULL value in SQL
+It means the column has no value.
+it is also reffered to as absence of data
+
+8.) Unique key  
+It ensures that all values in a column are unique.
+No duplicate values are allowed
+Unique key allows null values
+Primary key does not allow null values
+
+9.) Database
+It is aorganised way to store and manage data
+Each row represent a record and column represent a detail about a column.
+
+10.) Difference between sql and nosql
+
+SQL: Relational Database Management System
+-> They have fied or static schema
+-> They cannot be changes as they row and columns
+-> They are best suited for complex query operation
+eg: Oracle, MySQL, PostgreSQL 
+
+NoSQL: Non-Relational Database Management System
+-> The data is dynamic
+-> The data is primarily stored in json objects 
+-> They are not prefered for complex query operations
+eg: MongoDb, CouchDb, ElasticSearch
+
+11.) What is a table and a field in sql
+It is like a spreadsheet that stores data in a organised way using rows and columns
+Each table contains records and their detail
+Field is a column in the table.
+It repsresnts a specifix attribute or property of the data
+
+12.) Select statement
+It is used to retrive data from table(s) -> Single or multiple tables
+Where , order can be used to sort or filter the data
+
+13.) Constarint
+It is rule applied to a table to ensure that the data is accurate and consistent
+It helps maintain data integrity bu restricting values that can be modified in a table
+Types of constaint:
+-> Unique
+-> Foriegn key
+-> Primary key
+-> Default
+-> NOT NULL
+-> Check
+
+14.) Normalisation
+It is done by splitting into smaller, relatable tables and linking them using relationships like primary and foriegn keys
+-> The goal is used to reduce redundany and ensure data consistancy
+
+15.) Where 
+It servers the purpose of selectively filtering rows accordingly to specified conditions
+
+16.) Union and Union all
+UNION:
+it is used to combine results of 2 tables by removing multiple instances of same values
+UNION ALL:
+it is used to combine results of 2 tables by allowing same tables from respective tables
+
+17.) Indexes
+It creates a sorted structure based on one or more columns making data retrival much faster
+
+CREATE INDEX idx_customer_name ON customers(name);
+
+
+18.) GROUP BY
+It is a clause in sql that groups rows in columns allowing you to apply functions like SUM,COUNT or AVG to each Group
+
+eg: to get sales by region
+
+select region, sum(amount) AS total_sales
+from sales 
+group by region
+
+19.) Alias in sql
+It is a temporary name that is given to a table to colmn to make it wasier to read or work with
+
+20.) ORDER BY
+it is used to sort result set of a query based on one or more columns
+it can be sortted by ascending or descending order
+
+21.) Difference between where and having 
+WHERE:
+-> The clause specifies the criteria which records must meet to be selected in result set
+It can be used without group by clause
+-> It is used for select rows before grouping
+-> It cannot contain aggregate functions
+-> It is used to impose condition on select statement as well as single row functions.
+eg: SELECT Column, AVG(Column_name) FROM table_name
+WHERE Column > value 
+GROUP BY column_name
+
+having:
+-> It cannot be used without a group by clause
+-> It select one or more rows after grouping
+-> It can contain aggregate functions
+-> Used to impose condition on GROUP function and is used after group by clause
+
+Syntax:
+SELECT column_name
+FROM table_name
+WHERE condition
+GROUP BY column_name
+HAVING condition
+ORDER BY condition
+
+22.) VIEW
+-> It is essentially a virtual table derived from the result set of a select query
+-> It includes simplifying intricate queries, enhances data security through an added layer and enabling presentation of data subset to users.
+
+23.) Stored procedure
+It is a precompilied SQL statements that can be executed together as a unified entity
+They are commonly used to encapsulate business logic, improve performance and ensure data manipulation practices
+
+24.) Trigger in SQL
+It consists of predefined sequence of actions that are executed automatically when an insert , delete or update operation takes place on a table
+They are used to ensure data consitancy , conduct auditing and streamline various tasks
+
+25.) Aggregate functions
+They perform certain functions on set of values.
+MIN() -> Get the minimum value form resultant set
+MAX() -> Get the maximum value from resultant set
+SUM() -> Get the sum of values from resultant set
+AVG() -> Get the simple average of resultant set
+COUNT() -> Get the count of no of records from resultant set
+
+26.) Update value in db
+It can be done using the update statemnt using pre-existing conditions for a record in db
+
+27.) What is a self-join and how would you use it?
+It is a type of join where a table is joined with itself. 
+It is useful for comparing rows within the same table or exploring hierarchical relationships
+eg: Finding exploees and managers in an order
+
+28.) select e.name as employee , m.name as manager
+from employees e
+left join employees m on e.manager_id = m.employee_id
+
+30.) Different types of join
+INNER JOIN:
+Gathers rows that have matching values in both tables
+RIGHT JOIN:
+Gathers all rows from the right table with matching rows from the left table
+LEFT JOIN:
+Gathers all rows from the left table with matching rows from left table
+FULL JOIN:
+Gathers all rows where there is a match in either of the tables
+
+31.) subquery
+It refers to a query that is embedded within another query serving purpose of fetching information that will be passed on as a condition or value to a outer query
+eg:
+SELECT name FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees)
+
+32.) Optimised sql query
+-> It involves improving performance of queries by reducing resource usage and execution time
+-> It includes appropraite indexes, optimizing query
+-> Costly operations like full table scans
+
+33.) Correlated subqueries
+Type of subquery tha makes reference to columns from surrounding outer query
+-> Subquery is executed repeatedly once for each row being by outer query and execution dependends on outer query
+
+34.) Transaction
+Group of one or more sql commands that are treated as a single unit.
+It ensures that all operations either success completly or fail entirely
+itguarentees the integrity of database
+
+35.) ACID properties
+Atomicity:
+Eniter all operations and properly reflected in db or none
+Consistancy:
+Execution of a transaction in isolcation perserves consistancy of db
+Isolation:
+Multiple transaction must execute concurrently in Isolation
+Durabolity:
+After transaction is completed successfully. The changes must persist if in case of system failure
+
+36.) Implement error handling
+sql server uses try catch block. The catch block handles the rollback and mentions the error log
+
+38.) Denormalisation
+When we combine or duplicate to make it faster to retrive.
+
+39.) Custered index:
+It determines the  physical order of data rows in a table
+Each table can have only one clustered index
+
+40.) SQL injection:
+It is a security risk where attacker insert harmful code into queries , potentially accessing or tampering with db
+Validate input to allow only expected values , stored prcedures, and escape chars and db permisions
+
+41)
