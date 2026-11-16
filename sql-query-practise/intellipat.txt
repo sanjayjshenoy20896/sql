@@ -1,0 +1,228 @@
+Intellipat interview questions
+
+1.) Finding total sales for each month od the year from 2023
+
+-> Use SUM function to calculate
+-> month func
+
+SELECT Month(sale_date) as month, sum(anount) as TotalSales from sales
+WHERE Year(sale_date) = 2023
+Group by Month(sale_date)
+order by month;
+
+
+2.) Finding customers who placed orders after 1st Jan 2023
+-> The concept used here is joins
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    City VARCHAR(50)
+)
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY
+    CustomerID INT,
+    OrderDate DATE,
+    OrderAmount INT,
+)
+SELECT 
+c.customerId,
+o.OrderID
+o.OrderDate,
+o.OrderAmount,
+c.customerName,
+c.city
+from customers
+JOIN Orders o on o.customerID = c.CustomerID
+WHERE o.OrderDate > 2023-01-01
+
+3.) SECOND highest salary for department 101
+-> MAX aggregate func
+-> group by
+-> Having
+
+CREATE TABLE employees (
+    EmployeeID INT PRIMARY KEY,
+    DepartmentID INT,
+    Salary DECIMAL(10,2)
+)
+
+-> SUBQUERY
+
+SELECT MAX(Salary) as SECOND_HIGHEST_SALARY FROM employees
+WHERE salary < (select MAX(Salary) from employees where departmentId = 101)
+AND DepartmentID = 101
+
+4.) Finding products that have never been sold
+CREATE TABLE PRODUCTS (
+    ProductId INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10,2)
+)
+
+CREATE TABLE SALE (
+    SaleId INT PRIMARY KEY,
+    ProductId INT,
+    Quantity INT,
+)
+
+SELECT ProductId FROM PRODUCTS
+WHERE ProductId NOT IN (SELECT DISTINCT ProductId FROM Sale)
+
+
+5.) Find customers whose order amount exceeds 1000
+
+Select customerID, SUM(order.OrderAmount) as total_order_amount from order group by customerID,total_order_amount having SUM(order.OrderAmount) > 1000;
+
+
+
+6.) Finding the total quantity for each product from stores in LA during 2023
+Products structure:
+ProductId INT PRIMARY KEY
+ProductName VARCHAR(100)
+CategoryId INT
+
+Stores structure:
+StoreId INT PRIMARY KEY
+StoreName VARCHAR(100)
+CategoryId INT
+
+Sales structure
+SaleId INT PRIMARY KEY
+ProductId INT
+StoreId INT
+Quantity INT
+SaleDate Date
+
+select 
+SUM(s.Quantity) as total_quantity,
+p.productId,
+st.StoreName,
+MONTH(s.sale_date)
+from Sales s
+LEFT JOIN Stores st ON St.StoreId = s.StoreID
+LEFT JOIN Product p on p.ProductId = s.ProductId
+group by
+p.ProductId,
+st.StoreName
+SUM(s.Quantity),
+MONTH(s.sale_date)
+Having 
+st.StoreName = 'LA'
+and Month(s.sale_date) = '2023'
+and  p.ProductId IN (<IDS OF LAPTOP AND TABLET>);
+
+
+Query by video:
+SELECT 
+P.ProductName,
+SUM(S.Quantity) as TotalQuantitySold 
+from Products  P
+JOIN Sales S on S.ProductId = P.ProductId
+JOIN Stores ST on ST.StoreId = s.StoreId
+WHERE P.ProductName = 'laptop' or P.ProductName = 'tablet'
+and st.city = 'LA' and year(s.SaleDate) = '2023'
+GROUP BY p.ProductName;
+
+
+7.) Finding names of employees along with their direct managers
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    ManagerID INT
+    FORIEGN KEY (ManagerID) References EMPLOYEES(EmployeeID)
+)
+
+select e.EmployeeID,e.EmployeeID,e1.EmployeeName as manager
+from employees
+left join employees e1 on e.managerId = e1.EmployeeID
+
+8.) Find customer name, total order amount, total payment amount for orders placed in 2023
+
+Customer Table
+CustomerID INT PRIMARY KEY,
+CustomerName VARCHAR(100)
+
+Orders Table
+OrderID INT PRIMARY KEY,
+CustomerId INT,
+OrderDate Date,
+OrderAmount DECIMAL(10,2),
+FORIEGN KEY(CustomerID) references Customers(CustomerID)
+
+Payments
+PaymentId INT PRIMARY KEY
+OrderId INT,
+PaymentAmount DECIMAL(10,2),
+PaymentDate Date
+
+SELECT 
+c.customerName,
+c.customerId,
+SUM(p.PaymentAmount),
+SUM(o.OrderAmount)
+from customers c
+JOIN Orders on c.customerID = o.customerID
+JOIN Payments on o.orderId = p.orderId
+WHERE YEAR(o.PaymentDate) = '2023'
+GROUP BY 
+c.customerID,
+SUM(p.PaymentAmount),
+SUM(o.orderAmount),
+c.customerName;
+
+video ans
+select
+c.customerName,
+SUM(o.OrderAmount),
+SUM(p.PaymentAmount)
+from orders
+join customers c on c.customerID = o.orderId
+join payments p on p.orderId = o.orderId
+WHERE Year(o.OrderDate) = '2023'
+GROUP BY C.CustomerName;
+
+9.) Finding books that were not borrowed in the last 6 months
+Books Table:
+BookId INT PRIMARY KEY
+Title VARCHAR(100)
+AuthorId INT
+
+Borrowed
+BorrowId INT PRIMARY KEY
+BookId INT
+BorrowDate DATE
+
+Select b.Title,
+FROM books b
+LEFT JOIN borrowed bo on b.BookId = bo.BookId
+WHERE b.BookId not in 
+(select BookId FROM BorrowedDate > curDate() - intervel 6 Month)
+or BorrowDate is null;
+
+10.) Finding total salary expense for each department for the latest salary record only
+Table departments
+DepartmentID INT PRIMARY KEY,
+DepartmentName VARCHAR(100),
+
+Table Employees
+EmployeeID INT PRIMARY KEY,
+EmployeeName VARCHAR(100),
+DepartmentID INT
+
+Table Salaries
+EmployeeID INT,
+Salary DECIMAL(10,2),
+EffectiveDate Date
+
+SELECT 
+SUM(s.salary) as total_salary_expense,
+d.departmentId
+from Salaries s
+JOIN Employees e on e.EmployeeID = s.EmployeeID
+JOIN Departments d on d.departmentId = e.DepartmentID
+WHERE s.EffectiveDate = (SELECT max(effectiveDate) from Salaries where EmployeeId = e.EmployeeId)
+GROUP BY
+d.departmentId,
+
+
