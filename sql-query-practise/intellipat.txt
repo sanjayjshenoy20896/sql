@@ -225,4 +225,100 @@ WHERE s.EffectiveDate = (SELECT max(effectiveDate) from Salaries where EmployeeI
 GROUP BY
 d.departmentId,
 
+11.) Finding products that have been ordered more than 5 times across all orders
+Table structure:
+Create table Products (
+    ProductId INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10,2)
+);
+
+CREATE TABLE Orders(
+    OrderID INT PRIMARY KEY,
+    ProductId INT,
+    Quantity INT,
+    FORIEGN KEY (ProductId) References Products(ProductId)
+);
+
+Solution:
+Select ProductName
+from Products 
+WHERE ProductId IN (SELECT productId from orders group by ProductId having SUM(Quantity) >5)
+
+
+12.) Finding employees who earn more than the average salary of their respective departments
+Table structure:
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,
+    Salary DECIMAL(10,2)
+)
+
+Solution:
+
+select EmployeeName,salary from employees e1
+where Salary > (select avg(salary) from employees e2 where e2.departmentId = e1.departmentId)
+
+ADDED QUESTION: If we want to calculate average salary of employee
+select EmployeeName,salary from employees e1
+where Salary > (select avg(salary) from employees e2 where e2.departmentId = e1.departmentId)
+GROUP BY DepartmentID;
+
+13.) Rank each salesperson's sales for each product based on the amount.
+-- with the highest rank as 1
+
+Rank function is used here
+Table structure:
+CREATE TABLE Sales (
+    SalesPersonID INT,
+    SaleAmount DECIMAL(10,2),
+    SaleDate Date
+)
+
+
+Solution:
+select 
+SalesPersonID,
+SaleAmount,
+RANK() OVER(PARTITION BY SalesPersonID ORDER BY SaleAmount DESC) as saleRank
+from Sales;
+
+-- Rank functions are supported in sql functions 8 and above
+
+Window average:
+14.) Finding 7-day moving average of daily sales amount
+Table structure:
+
+Create table DailySales (
+    SaleDate Date,
+    Amount Decimal(10,2)
+)
+
+select *,AVG(AMOUNT) OVER(ORDER BY SaleDate Rows 6 Preceding) as MovingAverageSeven from SalesPersonID
+
+
+Case statment example:
+15.) Classifying students based on their scores using Case statements
+HIgh -> score is greater than 80
+Medium -> if score is between 50 and 79
+Low -> if score is less than 50
+
+Table structure:
+CREATE TABLE STUDENTS (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Score Decimal(5,2)
+)
+
+select name, score ,
+CASE 
+WHEN score >= 80 THEN 'HIGH'
+WHEN SCORE between 50 and 79 Then 'Medium'
+ELSE 'LOW'
+END CASE as rank
+FROM students
+order by score desc;
+
+
 
