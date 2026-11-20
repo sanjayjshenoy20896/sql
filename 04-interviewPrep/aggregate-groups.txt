@@ -1,0 +1,187 @@
+the use of aggregate function along with group by clause
+1.) While using with joins -> When to include select fields in group by and when not needed
+2.) W/O joins -> When to use group by and include select fields
+
+Additional question
+When we use aggregate fields in select clause or in whereclauseor having cluse, when should be include it in the group by field list
+
+A.) Fundamental rule of group by
+Whenever you use an aggregate function (COUNT, SUM, AVG, MIN, MAX) alongside normal columns in the SELECT clause:
+- Every non-aggregated column in the SELECT clause must generally be included in the GROUP BY clause.
+- Aggregated columns do not need to be included in GROUP BY.
+- Columns used in WHERE or HAVING do not automatically need to be included in GROUP BY.
+Remember this rule: GROUP BY defines the level at which you want to calculate your aggregate.
+
+Lets us explore examples:
+
+Consider the employee table:
+CREATE EMPLOYEE TABLE (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100),
+    department VARCHAR(10),
+    salary DECIMAL(10,2)
+)
+
+Scenario A: Find total salary of all employees
+SELECT SUM(salary) AS total_salary
+FROM employees;
+
+Here group by is not needed as we want one aggregate result
+
+Scenario B: Find total salary department-wise
+SELECT
+    department,
+    SUM(salary) AS total_salary
+FROM employees
+GROUP BY department;
+
+Because we want the sum calculated separately for each department.
+
+Scenario C: Find average salary department-wise
+SELECT
+    department,
+    AVG(salary) AS avg_salary
+FROM employees
+GROUP BY department;
+
+Here:
+- department is a normal column → include in GROUP BY.
+- AVG(salary) is an aggregate → don't include in GROUP BY.
+
+Scenario D: Multiple normal columns in SELECT
+
+SELECT
+    department,
+    name,
+    SUM(salary)
+FROM employees
+GROUP BY department;
+
+The above query is invalid in postgreSQl
+Because name is neither:
+- Included in GROUP BY.
+- Used inside an aggregate function.
+SQL doesn't know which employee's name to display for each department.
+
+Correct query:
+SELECT
+    department,
+    name,
+    SUM(salary)
+FROM employees
+GROUP BY department, name;
+
+
+With joins
+Now introducing another table 
+Department table
+id INT PRIMARY KEY
+DepartmentName VARCHAR(100)
+
+Scenario 1:
+we want the total salary for each department using a JOIN.
+
+SELECT
+    d.department_name,
+    SUM(e.salary) AS total_salary
+FROM employees e
+JOIN departments d
+    ON e.department = d.department_name
+GROUP BY d.department_name;
+
+Here, we include d.department_name in GROUP BY because it is a non-aggregated column in SELECT.
+
+Scenario 2: Selecting columns from both tables
+
+SELECT
+    d.id,
+    d.department_name,
+    SUM(e.salary) AS total_salary
+FROM employees e
+JOIN departments d
+    ON e.department = d.department_name
+GROUP BY
+    d.id,
+    d.department_name;
+
+Here both id and department_name is included in group by as they are non aggrehate columns in select select
+
+4. Aggregate functions in SELECT, WHERE and HAVING
+A. Aggregate function in SELECT
+SELECT
+    department,
+    SUM(salary) AS total_salary
+FROM employees
+GROUP BY department;
+
+SUM(salary) doesn't need to be in GROUP BY because it is an aggregate.
+
+department needs to be in GROUP BY because it is a normal column.
+
+B. Aggregate function in WHERE
+SELECT
+    department,
+    SUM(salary)
+FROM employees
+WHERE SUM(salary) > 80000
+GROUP BY department;
+
+-> This is invalid
+
+SELECT
+    department,
+    SUM(salary) AS total_salary
+FROM employees
+GROUP BY department
+HAVING SUM(salary) > 80000;
+
+
+C. Aggregate function in HAVING
+SELECT
+    department,
+    SUM(salary)
+FROM employees
+WHERE salary > 45000
+GROUP BY department;
+
+Here:
+- department → included in GROUP BY.
+- COUNT(*) → not included in GROUP BY.
+- COUNT(*) in HAVING → also doesn't need to be included in GROUP BY.
+Important: The same rule applies to aggregate functions whether they appear in SELECT or HAVING.
+
+5. What if WHERE contains a normal column?
+
+SELECT
+    department,
+    SUM(salary)
+FROM employees
+WHERE salary > 45000
+GROUP BY department;
+
+
+his is perfectly valid.
+
+Why don't we include salary in GROUP BY?
+
+Because salary is only being used to filter individual rows, not to determine the grouping.
+
+The query execution conceptually works like this:
+1. WHERE filters employees whose salary is greater than 45000.
+2. GROUP BY groups the remaining employees by department.
+3. SUM calculates the salary for each department.
+4. SELECT returns the results.
+
+
+Complete summary: When to include columns in GROUP BY?
+Column usage	Include in GROUP BY?
+Normal column in SELECT	Yes, generally
+Aggregate column in SELECT	No
+Normal column in WHERE	No
+Aggregate function in WHERE	Not allowed
+Normal column in HAVING	Depends; generally yes if not aggregated
+Aggregate function in HAVING	No
+Normal column in JOIN condition	Not automatically
+Normal column in ORDER BY	Depends on query and grouping rules
+
+One additional point: a column in ORDER BY that isn't in SELECT may still need to be grouped or aggregated, depending on the expression and database rules.
